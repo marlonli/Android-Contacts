@@ -16,8 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".DetailsActivity" android:label="Contacts Details"/>
+        <activity android:name=".ProfileActivity" android:label="Contacts Profile"></activity>
     </application>
 
 </manifest>

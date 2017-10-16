@@ -7,16 +7,13 @@
     tools:context="com.example.jingyuan.contacts.MainActivity">
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/fragment_contacts"
         android:name="com.example.jingyuan.contacts.ContactsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_contacts"/>
 </android.support.constraint.ConstraintLayout>
