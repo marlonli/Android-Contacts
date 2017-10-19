@@ -10,18 +10,19 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by jingyuan on 10/15/17.
+ * Created by jingyuan on 10/11/17.
  */
 
-public class mAdapterBringToTop extends BaseAdapter {
+public class mAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
     public List<Contact> contacts;
 
-    public mAdapterBringToTop(Activity activity, List<Contact> contacts) {
+    public mAdapter(Activity activity, List<Contact> contacts) {
         this.activity = activity;
         this.contacts = contacts;
     }
@@ -42,7 +43,7 @@ public class mAdapterBringToTop extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup viewGroup) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // Use view holder to set tag for each view
         ViewHolder mHolder = null;
 
@@ -66,7 +67,6 @@ public class mAdapterBringToTop extends BaseAdapter {
         mHolder.tv.setText(contacts.get(position).getName());
         mHolder.cb.setChecked(contacts.get(position).getChecked());
 
-        // TODO:two lists check simultaneously
         // Set check box onClick event
         final ViewHolder finalMHolder = mHolder;
         mHolder.cb.setOnClickListener(new View.OnClickListener() {
@@ -75,13 +75,8 @@ public class mAdapterBringToTop extends BaseAdapter {
                 // set checked property
                 contacts.get(position).setChecked(finalMHolder.cb.isChecked());
 
-                // Bring to the top
-                contacts.add(0, contacts.get(position));
-                contacts.remove(position + 1);
-                notifyDataSetChanged();
             }
         });
-
 
         return convertView;
     }
@@ -90,4 +85,6 @@ public class mAdapterBringToTop extends BaseAdapter {
         public TextView tv;
         public CheckBox cb;
     }
+
+
 }

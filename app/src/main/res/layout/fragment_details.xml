@@ -1,0 +1,124 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.example.jingyuan.contacts.DetailsFragment"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/content_child_h"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/content_child_v"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_const_name"
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="12dp"
+                    android:text="Name: " />
+
+                <EditText
+                    android:id="@+id/editText_name"
+                    android:layout_width="145dp"
+                    android:layout_height="40dp"
+                    android:layout_alignStart="@+id/textView_const_name"
+                    android:layout_below="@+id/textView_const_name"
+                    android:layout_marginTop="6dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/textView_const_phone"
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:layout_alignStart="@+id/editText_name"
+                    android:layout_below="@+id/editText_name"
+                    android:layout_marginTop="12dp"
+                    android:text="Phone Number: " />
+
+                <EditText
+                    android:id="@+id/editText_phone"
+                    android:layout_width="145dp"
+                    android:layout_height="40dp"
+                    android:layout_alignStart="@+id/textView_const_phone"
+                    android:layout_below="@+id/textView_const_phone"
+                    android:layout_marginTop="6dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="phone" />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/button_image"
+                android:src="@drawable/person_default"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="20dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textView_const_relation"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editText_phone"
+            android:layout_below="@+id/editText_phone"
+            android:layout_marginTop="12dp"
+            android:text="Relationship:" />
+
+        <ListView
+            android:id="@+id/listview_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/button_addPerson"
+            android:layout_below="@+id/button_addPerson"
+            android:layout_marginBottom="0dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_addPerson"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@id/listview_details"
+            android:layout_below="@+id/listview_details"
+            android:layout_gravity="right"
+            android:layout_marginBottom="12dp"
+            android:focusable="false"
+            android:text="Add Person"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+</LinearLayout>

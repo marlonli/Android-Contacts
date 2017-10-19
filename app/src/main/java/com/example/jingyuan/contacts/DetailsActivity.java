@@ -18,23 +18,42 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-    }
+        DetailsFragment df = (DetailsFragment) getFragmentManager().findFragmentById(R.id.fragment_details);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        List<Contact> list = new ArrayList<>();
         Intent intent = getIntent();
 
         // Communication with fragment
         int size = intent.getIntExtra("size", 0);
         for (int i = 0; i < size; i++) {
             Contact person = (Contact) intent.getSerializableExtra("person" + i);
-            list.add(person);
+            df.list.add(person);
         }
 
-        DetailsFragment df = (DetailsFragment) getFragmentManager().findFragmentById(R.id.fragment_details);
-        df.showDetails(list);
+        if (intent.getStringExtra("name") != null) {
+            EditText name = (EditText)findViewById(R.id.editText_name);
+            name.setText(intent.getStringExtra("name"));
+        }
+        if (intent.getStringExtra("phone") != null) {
+            EditText phone = (EditText)findViewById(R.id.editText_phone);
+            phone.setText(intent.getStringExtra("phone"));
+        }
+//        df.showDetails(list);
+
+        Log.v("activity status", "DetailsActivity onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        Log.v("activity status", "DetailsActivity onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         Log.v("activity status", "DetailsActivity onResume");
     }
 
@@ -49,32 +68,36 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.v("Activity State", " DetailsActivity Saving...");
+        DetailsFragment df = (DetailsFragment) getFragmentManager().findFragmentById(R.id.fragment_details);
+        // Save image name
+        outState.putString("image", df.imageName);
 
         // Save list
-        DetailsFragment df = (DetailsFragment) getFragmentManager().findFragmentById(R.id.fragment_details);
         List<Contact> listToBeSaved = df.getList();
+        outState.putInt("size", listToBeSaved.size());
         for (int i = 0; i < listToBeSaved.size(); i++) {
             outState.putSerializable("list" + i, listToBeSaved.get(i));
         }
-
-        // Save EditText
-        outState.putInt("size", listToBeSaved.size());
-        outState.putString("name", df.getName());
-        outState.putString("phone", df.getPhone());
     }
 
     @Override
     public void onRestoreInstanceState(Bundle inState) {
         super.onRestoreInstanceState(inState);
         Log.v("Activity State", "Details Activity Restoring");
+        // Restore list
+        int size = inState.getInt("size");
         DetailsFragment df = (DetailsFragment) getFragmentManager().findFragmentById(R.id.fragment_details);
+        df.list.clear();
+        List<Contact> restoreList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            restoreList.add((Contact) inState.getSerializable("list" + i));
+        }
+        df.list.addAll(restoreList);
 
-        // Restore text
-        EditText name = (EditText) findViewById(R.id.editText_name);
-        name.setText(inState.getString("name"));
-        EditText phone = (EditText) findViewById(R.id.editText_phone);
-        phone.setText(inState.getString("phone"));
-//        adapter.notifyDataSetChanged();
+        // Restore image
+        df.imageName = inState.getString("image");
+        df.photoOutputUri = Uri.parse("file:////sdcard/" + df.imageName + ".jpg");
+        df.showImage();
     }
 
 
